@@ -4,9 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=<canvas >, initial-scale=1.0" />
-    <title>Document</title>
+    <title>SnakeJS</title>
+    <style>
+      canvas {
+        border: 2px solid black;
+      }
+    </style>
   </head>
   <body>
-    <canvas id="game" width="500" height="500"></canvas>
+    <canvas id="game" width="500" height="500"> </canvas>
+    <div class="controllers">
+      <button type="button">Start</button>
+      <button type="button" onClick="canvas.clearCanvas()">Quit game</button>
+      <button type="button">Pauze</button>
+    </div>
+    <script src="./canvas.js"></script>
   </body>
 </html>
