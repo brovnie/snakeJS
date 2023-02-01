@@ -1,8 +1,8 @@
 export class Snake {
     constructor () {
         this.snakeBody = [];
-        this.snakeHeadX = 225;
-        this.snakeHeadY = 225;
+        this.snakeHeadX = 240;
+        this.snakeHeadY = 240;
         this.tileLength = 2;     
     }
     updatePosition(e) {
@@ -11,6 +11,7 @@ export class Snake {
         }
         else if (e.keyCode == '40') {
             this.snakeHeadY += 20;
+                        console.log(this.snakeHeadY)
         }
         else if (e.keyCode == '37') {
             this.snakeHeadX -= 20;
