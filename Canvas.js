@@ -9,26 +9,32 @@ class Canvas {
         this.tiles = 20;
         this.snake = new Snake();
         this.pauze = false;
+        this.time = 1;
     }
     start() {
-        
         this.clearCanvas();
-        this.ctx.fillStyle = "black";
-        this.ctx.fillRect(240, 240, this.tiles, this.tiles);
-        onkeydown = (e) => { this.drawSnake(e); };
+        if(!this.pauze) {
+            this.snake.resetPosition();
+        } 
+        this.drawSnake();
+        onkeydown = (e) => { this.moveSnake(e); };
     }
-    pause(){
-        onkeydown = (e) => { e.preventDefault; };
+    pause() {
+        onkeydown = (e) => {  };
         this.pauze = true;
     }
     stop() {
         this.clearCanvas();
+        this.snake.resetPosition();
     }
-    drawSnake(e){
-        this.clearCanvas();
-        this.snake.updatePosition(e);
+    drawSnake(){
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(this.snake.snakeHeadX, this.snake.snakeHeadY, this.tiles, this.tiles);
+    }
+    moveSnake(e) {
+        this.clearCanvas();
+        this.snake.updatePosition(e);
+        this.drawSnake();
     }
     clearCanvas() {
         this.ctx.clearRect(0, 0, this.canvasWidth,this.canvasHeight);
