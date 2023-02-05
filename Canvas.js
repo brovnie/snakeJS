@@ -8,9 +8,9 @@ class Canvas {
         this.canvasWidth = this.canvas.width;
         this.canvasHeight = this.canvas.height;
         this.tiles = 20;
-        this.snake = new Snake();
         this.pauze = false;
         this.time = 1;
+        this.snake = new Snake();
         this.apple = new Apple(this.canvasWidth, this.canvasHeight, this.tiles);
     }
     start() {
@@ -20,7 +20,19 @@ class Canvas {
             this.drawApple();
         } 
         this.drawSnake();
-        onkeydown = (e) => { this.moveSnake(e); };
+        setInterval( () => {  
+            this.snake.updatePosition();
+            this.clearCanvas();
+            this.catchApple();
+            this.drawSnake();
+            this.drawApple();
+        }, 300);
+
+        onkeydown = (e) => { 
+            this.moveSnake(e); 
+            this.catchApple();
+        };
+        
     }
     pause() {
         onkeydown = (e) => {  };
@@ -30,6 +42,12 @@ class Canvas {
         this.clearCanvas();
         this.snake.resetPosition();
     }
+    moveSnake(e) {
+        this.clearCanvas();
+        this.drawApple();
+        this.snake.updateDirection(e);
+        this.drawSnake();
+    }
     drawSnake(){
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(this.snake.snakeHeadX, this.snake.snakeHeadY, this.tiles, this.tiles);
@@ -38,11 +56,11 @@ class Canvas {
        this.ctx.fillStyle = "red"; 
         this.ctx.fillRect(this.apple.appleX, this.apple.appleY, this.tiles, this.tiles);
     }
-    moveSnake(e) {
-        this.clearCanvas();
+    catchApple(){
+        if((this.snake.snakeHeadX === this.apple.appleX) && (this.snake.snakeHeadY === this.apple.appleY)) {
+        this.apple.updatePosition();
         this.drawApple();
-        this.snake.updatePosition(e);
-        this.drawSnake();
+    }
     }
     clearCanvas() {
         this.ctx.clearRect(0, 0, this.canvasWidth,this.canvasHeight);
@@ -50,3 +68,4 @@ class Canvas {
 }
 
 window.canvas = new Canvas();
+canvas.drawSnake();
