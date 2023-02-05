@@ -68,7 +68,6 @@ export class Snake {
     }
 
     resetPosition(){
-        console.log("reset");
         this.snakeHeadX = Snake.snakeCenterX;
         this.snakeHeadY = Snake.snakeCenterY;
         this.tileLength = 2;

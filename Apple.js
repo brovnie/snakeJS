@@ -9,6 +9,5 @@ export class Apple {
     updatePosition() {
         this.appleX = Math.round(Math.random() * (this.screenWidth  / this.appleSize)) * this.appleSize;
         this.appleY = Math.round(Math.random() * (this.screenHeight  / this.appleSize)) * this.appleSize;
-        console.log("X: " + this.appleX + " Y: " + this.appleY);
     }
 }

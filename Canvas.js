@@ -9,14 +9,13 @@ class Canvas {
         this.canvasHeight = this.canvas.height;
         this.tiles = 20;
         this.pauze = false;
-        this.time = 1;
+        this.time = 5;
         this.interval = null;
         this.snake = new Snake();
         this.apple = new Apple(this.canvasWidth, this.canvasHeight, this.tiles);
     }
     start() {
         this.clearCanvas();
-        this.isRunning = true;
         if(!this.pauze) {
             this.snake.resetPosition();
             this.drawApple();
@@ -28,7 +27,7 @@ class Canvas {
                 this.catchApple();
                 this.drawSnake();
                 this.drawApple();
-        }, 300);
+        }, 1000 / this.time);
         onkeydown = (e) => { 
                 this.moveSnake(e); 
                 this.catchApple();
@@ -51,6 +50,7 @@ class Canvas {
         this.snake.updateDirection(e);
         this.drawSnake();
     }
+    
     drawSnake(){
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(this.snake.snakeHeadX, this.snake.snakeHeadY, this.tiles, this.tiles);
@@ -63,6 +63,7 @@ class Canvas {
         if((this.snake.snakeHeadX === this.apple.appleX) && (this.snake.snakeHeadY === this.apple.appleY)) {
             this.apple.updatePosition();
             this.drawApple();
+            this.time +=5;
         }
     }
     clearCanvas() {
