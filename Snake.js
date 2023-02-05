@@ -2,15 +2,17 @@ const UP = "up";
 const DOWN = "down";
 const LEFT = "left";
 const RIGHT = "right";
-
+const snakeCenterX = 240;
+const snakeCenterY = 240;
 
 export class Snake {
     constructor () {
         this.snakeBody = [];
-        this.snakeHeadX = 240;
-        this.snakeHeadY = 240;
+        this.snakeHeadX = Snake.snakeCenterX;
+        this.snakeHeadY = Snake.snakeCenterY;
         this.tileLength = 2;
-        this.snakeDirection = "up";
+        this.snakeDirection = Snake.up;
+        this.snakePartSize = 20;
     }
     static get up() {
         return UP;
@@ -24,6 +26,13 @@ export class Snake {
     static get right() {
         return RIGHT;
     }
+    static get snakeCenterX() {
+        return snakeCenterX;
+    }    
+    static get snakeCenterY() {
+        return snakeCenterY;
+    }
+
     updateDirection(e) {
         if (e.keyCode == '38') {
             this.snakeDirection = Snake.up;
@@ -42,26 +51,26 @@ export class Snake {
     updatePosition() {
         if (this.snakeDirection === Snake.up) {
             if(this.snakeHeadY == 0) { return }
-            this.snakeHeadY -= 20;
+            this.snakeHeadY -= this.snakePartSize;
         }
         else if (this.snakeDirection === Snake.down) {
             if(this.snakeHeadY == 480) { return }
-            this.snakeHeadY += 20;
+            this.snakeHeadY += this.snakePartSize;
         }
         else if (this.snakeDirection === Snake.left) {
             if(this.snakeHeadX == 0) { return }
-            this.snakeHeadX -= 20;
+            this.snakeHeadX -= this.snakePartSize;
         }
         else if (this.snakeDirection === Snake.right) {
             if(this.snakeHeadX == 480) { return }
-            this.snakeHeadX += 20;
+            this.snakeHeadX += this.snakePartSize;
         }
     }
 
-
     resetPosition(){
-        this.snakeHeadX = 240;
-        this.snakeHeadY = 240;
+        console.log("reset");
+        this.snakeHeadX = Snake.snakeCenterX;
+        this.snakeHeadY = Snake.snakeCenterY;
         this.tileLength = 2;
         this.snakeDirection = Snake.up;
     }
