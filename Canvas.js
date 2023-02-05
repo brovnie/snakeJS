@@ -33,14 +33,12 @@ class Canvas {
                 this.moveSnake(e); 
                 this.catchApple();
         };
-     
     }
     pause() {
         onkeydown = (e) => {  };
         this.pauze = true;
     }
     stop() {
-    
         this.clearCanvas();
         clearInterval(this.interval);
         this.snake.resetPosition();
